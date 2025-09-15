@@ -1,7 +1,9 @@
 * {
-    --header-height: 80px;
+    --header-height: 160px;
     --particle-size: 16px;
-    --gradient-color: rgb(255, 153, 0);
+    --gradient-color: rgb(242, 148, 8);
+    --gradient-blend-mode: normal;
+    --particles-blend-mode: screen;
 }
 
 *[fill] {
@@ -22,23 +24,20 @@ body {
 
 header {
     z-index: 1000;
-    position: sticky;
+    position: absolute;
     width: 100%;
     height: var(--header-height);
-    background-color: rgb(255, 166, 65);
-    box-shadow: 0px 0px 50px black;
+    background: linear-gradient(rgb(0, 0, 0), transparent);
 }
 
 #content-wrapper {
-    width: 100%;
-    height: calc(100% - var(--header-height));
-    overflow: hidden;
-    display: flex;
-    position: relative;
+    display: inline-block;
+    position: absolute;
 }
 
 #background-wrapper {
-    position: relative;
+    position: absolute;
+    overflow: hidden;
     background-color: rgb(255, 85, 0);
 }
 
@@ -53,11 +52,11 @@ header {
     background: radial-gradient(transparent, var(--gradient-color));
     z-index: 1;
     opacity: 0.8;
-    mix-blend-mode: screen;
+    mix-blend-mode: var(--gradient-blend-mode);
 }
 
 #site-particles {
-    mix-blend-mode: screen;
+    mix-blend-mode: var(--particles-blend-mode);
     position: absolute;
     z-index: 2;
 }
@@ -70,4 +69,21 @@ header {
     z-index: 3;
     top: calc(50% - var(--particle-size) / 2);
     left: calc(50% - var(--particle-size) / 2);
+}
+
+.title {
+    display: flex;
+    position: relative;
+    font-family: "Baroness Kuffner";
+    font-size: 20vh;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    color: rgb(58, 27, 11);
+    text-shadow: 0px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+@font-face {
+    font-family: "Baroness Kuffner";
+    src: url("./fonts/BaronessKuffner.ttf");
 }
