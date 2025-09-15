@@ -1,5 +1,16 @@
 * {
-    --header-height: 100px;
+    --header-height: 80px;
+    --particle-size: 16px;
+    --gradient-color: rgb(255, 153, 0);
+}
+
+*[fill] {
+    width: 100%;
+    height: 100%;
+}
+
+*[cover] {
+    object-fit: cover;
 }
 
 body {
@@ -10,10 +21,12 @@ body {
 }
 
 header {
+    z-index: 1000;
     position: sticky;
     width: 100%;
     height: var(--header-height);
-    background-color: red;
+    background-color: rgb(255, 166, 65);
+    box-shadow: 0px 0px 50px black;
 }
 
 #content-wrapper {
@@ -21,21 +34,40 @@ header {
     height: calc(100% - var(--header-height));
     overflow: hidden;
     display: flex;
-    background-color: rgb(0, 8, 255);
+    position: relative;
 }
 
-#content-background {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    object-fit: cover;
-    opacity: 0.5;
+#background-wrapper {
+    position: relative;
+    background-color: rgb(255, 85, 0);
 }
 
-#content-gradient {
-    width: 100%;
-    height: 100%;
+#site-background {
     position: absolute;
-    z-index: 1000;
-    background: radial-gradient(transparent, rgb(255, 136, 0));
+    z-index: 0;
+    opacity: 0.8;
+}
+
+#site-gradient {
+    position: absolute;
+    background: radial-gradient(transparent, var(--gradient-color));
+    z-index: 1;
+    opacity: 0.8;
+    mix-blend-mode: screen;
+}
+
+#site-particles {
+    mix-blend-mode: screen;
+    position: absolute;
+    z-index: 2;
+}
+
+.particle {
+    position: absolute;
+    height: var(--particle-size);
+    width: var(--particle-size);
+    background-color: var(--gradient-color);
+    z-index: 3;
+    top: calc(50% - var(--particle-size) / 2);
+    left: calc(50% - var(--particle-size) / 2);
 }
