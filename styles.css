@@ -1,9 +1,13 @@
 * {
-    --header-height: 160px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: "Baroness Kuffner";
+    --header-height: 120px;
     --particle-size: 16px;
     --gradient-color: rgb(242, 148, 8);
     --gradient-blend-mode: normal;
     --particles-blend-mode: screen;
+    --base-color: rgb(255, 213, 0);
+    --dark-color: rgb(58, 27, 11);
 }
 
 *[fill] {
@@ -13,6 +17,10 @@
 
 *[cover] {
     object-fit: cover;
+}
+
+*[disable-events] {
+    pointer-events: none;
 }
 
 body {
@@ -27,7 +35,7 @@ header {
     position: absolute;
     width: 100%;
     height: var(--header-height);
-    background: linear-gradient(rgb(0, 0, 0), transparent);
+    background: linear-gradient(rgba(0, 0, 0, 0.8), transparent);
 }
 
 #content-wrapper {
@@ -79,8 +87,47 @@ header {
     text-align: center;
     justify-content: center;
     align-items: center;
-    color: rgb(58, 27, 11);
+    color: var(--dark-color);
     text-shadow: 0px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+#header-wrapper {
+    height: 50%;
+    gap: 0;
+    display: flex;
+    position: relative;
+
+    * {
+        letter-spacing: 1pt;
+    }
+}
+
+.header-option {
+    margin-top: 10px;
+    color: white;
+    font-size: 22pt; /* 18px con la sans */
+    height: 100%;
+    width: 10%;
+    display: inline-flex;
+    transition: border-bottom 0.4s ease;
+    padding: 8px;
+    border-bottom: 4px solid transparent;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.header-option:hover {
+    cursor: pointer;
+    border-bottom: 4px solid var(--base-color);
+}
+
+.header-option > * {
+    height: 100%;
+}
+
+.header-option > img {
+    object-fit: cover;
 }
 
 @font-face {

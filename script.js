@@ -1,20 +1,32 @@
+class Rand {
+    static sign() {
+        return Math.random() < 0.5 ? 1 : -1;
+    }
+
+    static int(a = 0, b = 1) {
+        return Math.round(Math.random() * (a - b) + b);
+    }
+}
+
 setInterval(createParticle, 160);
 
 const siteParticles = document.getElementById("site-particles");
 
+const particlesDirection = Rand.sign();
+
 function createParticle() {
     const particle = document.createElement("div");
     particle.className = "particle";
-    const rotation = randInt(-360, 360);
-    const randStartX = 60 - randInt(0, 10); 
-    const randDuration = randInt(4000, 4600);
-    const randLocalRotation = randInt(-360, 360);
-    const randEndRotation = 360 + randInt(0, 360);
+    const rotation = Rand.int(-360, 360);
+    const offsetX = 60 - Rand.int(0, 10); 
+    const duration = Rand.int(4000, 4600);
+    const localRotation = Rand.int(-360, 360);
+    const endRotation = (360 + Rand.int(0, 360)) * particlesDirection;
     particle.animate([
         {
             offset: 0,
             opacity: "1",
-            transform: "rotate(" + rotation + "deg) rotate(calc(360deg * 2)) translate(" + randStartX + "vw, 0px) rotate(" + randLocalRotation + "deg) scale(1)"
+            transform: "rotate(" + rotation + "deg) rotate(calc(" + (360 * particlesDirection) + "deg * 2)) translate(" + offsetX + (isLandscape() ? "vw" : "vh") + ", 0px) rotate(" + localRotation + "deg) scale(1)"
         },
         {
             offset: 0.8,
@@ -23,13 +35,13 @@ function createParticle() {
         {
             offset: 1,
             opacity: "0",
-            transform: "rotate(" + rotation + "deg) rotate(" + randEndRotation + "deg) translate(0vw, 0px) rotate(" + randLocalRotation + "deg) scale(0)"
+            transform: "rotate(" + rotation + "deg) rotate(" + endRotation + "deg) translate(0vw, 0px) rotate(" + localRotation + "deg) scale(0)"
         }
-    ], { duration: randDuration })
+    ], { duration: duration })
     .addEventListener("finish", () => particle.remove());
     siteParticles.insertBefore(particle, null);
 }
 
-function randInt(a, b) {
-    return Math.round(Math.random() * (a - b) + b);
+function isLandscape() {
+    return window.innerWidth > window.innerHeight;
 }
