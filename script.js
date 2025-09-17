@@ -17,9 +17,10 @@ const particlesDirection = Rand.sign();
 function createParticle() {
     const particle = document.createElement("div");
     particle.className = "particle";
+    // particle.style.top = (window.scrollY + window.innerHeight / 2) + "px";
     const rotation = Rand.int(-360, 360);
     const offsetX = 60 - Rand.int(0, 10); 
-    const duration = Rand.int(4000, 4600);
+    const duration = Rand.int(4600, 5200);
     const localRotation = Rand.int(-360, 360);
     const endRotation = (360 + Rand.int(0, 360)) * particlesDirection;
     particle.animate([
