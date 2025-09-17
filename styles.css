@@ -25,7 +25,10 @@ html {
     --dark-color: rgb(58, 27, 11);
     --font-size1: calc((2.5vw + 2.5vh) / 2);
     --font-size2: calc((2vw + 2vh) / 2);
+    --info-color: rgb(81, 40, 2);
+    --info-color-hover: rgb(90, 52, 16);
     --content-page-border: 5px solid var(--base-color);
+    --background-mix-color: rgb(255, 85, 0);
 }
 
 img {
@@ -72,7 +75,7 @@ header {
     position: absolute;
     width: 100%;
     height: var(--header-height);
-    background: linear-gradient(rgba(0, 0, 0, 0.8), transparent);
+    background: linear-gradient(rgba(39, 12, 2, 0.8), transparent);
 }
 
 .content-wrapper {
@@ -88,8 +91,7 @@ header {
 #background-wrapper {
     position: absolute;
     overflow: hidden;
-    background-color: rgb(255, 85, 0);
-    
+    background-color: var(--background-mix-color)
 }
 
 #site-background {
@@ -99,6 +101,7 @@ header {
 }
 
 #site-gradient {
+    pointer-events: none;
     position: absolute;
     background: radial-gradient(transparent 35%, var(--gradient-color));
     z-index: 1;
@@ -107,6 +110,7 @@ header {
 }
 
 #site-particles {
+    pointer-events: none;
     mix-blend-mode: var(--particles-blend-mode);
     position: fixed;
     height: 100%;
@@ -126,18 +130,6 @@ header {
     border-radius: 1000px;
 }
 
-.title {
-    display: flex;
-    position: relative;
-    font-family: "Baroness Kuffner";
-    font-size: 20vh;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    color: var(--dark-color);
-    text-shadow: 0px 10px 0px rgba(0, 0, 0, 0.4);
-}
-
 #header-wrapper {
     height: 50%;
     gap: 0;
@@ -146,7 +138,7 @@ header {
 
     > * {
         opacity: 0;
-        animation: fade-in 1.0s ease forwards;
+        animation: fade-in 0.8s ease forwards;
     }
 
     :nth-child(0) { animation-delay: 0.1s; };
@@ -155,12 +147,15 @@ header {
     :nth-child(3) { animation-delay: 0.4s; };
     :nth-child(4) { animation-delay: 0.5s; };
     :nth-child(5) { animation-delay: 0.6s; };
+    :nth-child(7) { animation-delay: 0.7s; };
+    :nth-child(8) { animation-delay: 0.8s; };
 }
 
-.header-option {
+.header-option, #header-separator {
+    text-decoration: none;
     margin-top: 10px;
     color: white;
-    font-size: var(--font-size2); /* 18px con la sans */
+    font-size: var(--font-size2);
     height: 100%;
     width: 10%;
     display: inline-flex;
@@ -170,6 +165,10 @@ header {
     align-items: center;
     justify-content: center;
     text-align: center;
+}
+
+#header-separator {
+    width: 30%;
 }
 
 .header-option:hover {
@@ -192,11 +191,11 @@ header {
 
 .content-page {
     animation: fade-in 1.0s ease;
-
+    transition: background-color 0.2s ease;
     padding: 2%;
     width: 100%;
     height: 100%;
-    background-color: rgb(81, 40, 2);
+    background-color: var(--info-color);
     display: flex;
     flex-wrap: wrap; 
 
@@ -227,6 +226,10 @@ header {
     }
 }
 
+.content-page:hover {
+    background-color: var(--info-color-hover);
+}
+
 .content-page[data-align="top"] {
     border-top: var(--content-page-border);
 
@@ -254,6 +257,21 @@ header {
     }
 }
 
+.content-page[data-align="right"] {
+    flex-direction: row-reverse;
+    border-right: var(--content-page-border);
+
+    > div {
+        width: 50%;
+        height: 100%;
+    }
+    
+    > p {
+        width: 50%;
+        height: 100%;
+    }
+}
+
 .separator {
     top: 0;
     position: absolute;
@@ -268,7 +286,7 @@ header {
     0% {
         opacity: 0;
     }
-    40% {
+    20% {
         opacity: 0;
         transform: translateY(50px);
     }

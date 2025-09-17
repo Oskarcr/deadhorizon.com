@@ -1,3 +1,9 @@
+fetch("./header.html").then(res => {
+    res.text().then((data) => {
+        document.querySelector("header").innerHTML = data;
+    });
+});
+
 class Rand {
     static sign() {
         return Math.random() < 0.5 ? 1 : -1;
